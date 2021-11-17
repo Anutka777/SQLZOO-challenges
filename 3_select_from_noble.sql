@@ -70,35 +70,34 @@ FROM nobel
 -- Show year, subject, and name of people who won a 'Medicine' prize
 -- in an early year (before 1910, not including 1910) together with
 -- winners of a 'Literature' prize in a later year (after 2004, including 2004).
-SELECT *
+SELECT  *
 FROM nobel
-  WHERE (subject = 'Medicine' AND yr < 1910) OR
-    (subject = 'Literature' AND yr >= 2004);
+WHERE (subject = 'Medicine' AND yr < 1910)
+OR (subject = 'Literature' AND yr >= 2004);
 
 -- Find all details of the prize won by PETER GRÜNBERG.
-SELECT *
+SELECT  *
 FROM nobel
-  WHERE winner = 'Peter Grünberg';
+WHERE winner = 'Peter Grünberg';
 
 -- Find all details of the prize won by EUGENE O'NEILL.
-SELECT *
+SELECT  *
 FROM nobel
-  WHERE winner = 'Eugene O''Neill';
+WHERE winner = 'Eugene O''Neill';
 
 -- List the winners, year and subject where the winner starts with Sir.
 -- Show the the most recent first, then by name order.
-SELECT winner, yr, subject
+SELECT  winner
+       ,yr
+       ,subject
 FROM nobel
-  WHERE winner LIKE 'Sir%' ORDER BY yr DESC;
+WHERE winner LIKE 'Sir%'
+ORDER BY yr DESC;
 
 -- Show the 1984 winners and subject ordered by subject and winner name;
 -- but list Chemistry and Physics last.
-SELECT winner, subject
+SELECT  winner
+       ,subject
 FROM nobel
-  WHERE yr = 1984 ORDER BY
-    CASE 
-      WHEN subject IN ('Chemistry', 'Physics')
-      THEN 1
-      ELSE 0
-    END,
-    subject, winner;
+WHERE yr = 1984
+ORDER BY CASE WHEN subject IN ('Chemistry', 'Physics') THEN 1 ELSE 0 END, subject, winner;
